@@ -1,0 +1,102 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h3>Quiz</h3>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div *ngIf="quiz_code_checked">
+                <h3>
+                    {{quiz.title}} - {{quiz.created_at | date:'short'}} - Time left : {{timer}}
+                </h3>
+                <ng-container *ngFor="let question of quiz.questions">
+                    <h4 class="underline">Q: {{question.text}}</h4>
+                    <textarea autosize class="form-control only_bottom_border" placeholder="Your answer" [(ngModel)]="question.answer" style="resize: none;"></textarea>
+                    <hr/>
+                </ng-container>
+                <div class="pull-right">
+                    <button type="button" class="btn btn-default" (click)="onCancelQuiz()">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="onSubmitQuiz()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="quizStoppedModal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog modal-sm vertical-align-center">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{stopped_modal_message}}</h4>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="router.navigate(['/dashboard'])">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="enterQuizCodeModal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog modal-sm vertical-align-center">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Enter Quiz Code</h4>
+                </div>
+                <div class="modal-body">
+                    <input class="form-control" type="text" [(ngModel)]="quiz_code">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" (click)="cancelCheckQuizCode()">Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="checkQuizCode()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="confirmCancelQuizModal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog modal-sm vertical-align-center">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Cancel Quiz</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        If you cancel, you will have to do the quiz from the start.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default btn-success" (click)="cancelQuiz()" data-dismiss="modal">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="confirmSubmitQuizModal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog modal-sm vertical-align-center">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Submit Quiz</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        You won't be able to edit your answers after you submited it.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default btn-success" (click)="submitQuiz()" data-dismiss="modal">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

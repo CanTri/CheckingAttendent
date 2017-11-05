@@ -1,0 +1,64 @@
+<div class="col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h3>Feedbacks</h3>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="row">
+                <div class="col-xs-4">
+                    <input placeholder="Search" class="form-control" [(ngModel)]="search_text" (ngModelChange)="onSearchChange()" />
+                </div>
+                <div class="col-xs-2">
+                    <select class="form-control" [(ngModel)]="selected_role" (ngModelChange)="onChangeRole()">
+                        <option *ngFor="let role of roles" [value]="role.id">{{role.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <br/>
+            <table class="table table-bordered text-center table-hover">
+                <thead>
+                    <tr>
+                        <th>From</th>
+                        <th>Title</th>
+                        <th>Submited At</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let feedback of feedbacks; let i = index" (click)="onClickFeedback(i)" [ngClass]="{'new_feedback':!feedback.read}">
+                        <td>{{feedback._from}}</td>
+                        <td>{{feedback.title}}</td>
+                        <td>{{feedback.created_at | date: 'dd/MM/yyyy'}}</td>
+                        <td><button *ngIf="feedbacks._from == 'Anonymous'" class="btn btn-primary" (click)="replyFeeback()">Reply</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="itemsPerPage" [(ngModel)]="currentPage" (pageChanged)="onPageChanged($event)" class="pull-right no_margin"></pagination>
+            <div class="form-group">
+                <select [(ngModel)]="itemsPerPage" (ngModelChange)="getFeedbacks()">
+                    <option>10</option>
+                    <option>30</option>
+                    <option>50</option>
+                </select>
+                <span>Items/page</span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="feedbackDetailModal" role="dialog">
+    <div class="vertical-alignment-helper">
+        <div class="modal-dialog vertical-align-center">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{feedback_title}}</h4>
+                </div>
+                <div class="modal-body">
+                    {{feedback_content}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
