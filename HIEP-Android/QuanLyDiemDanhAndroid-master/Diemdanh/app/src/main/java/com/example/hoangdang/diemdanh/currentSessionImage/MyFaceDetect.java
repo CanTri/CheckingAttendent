@@ -31,6 +31,7 @@ import com.example.hoangdang.diemdanh.SupportClass.AppVariable;
 import com.example.hoangdang.diemdanh.SupportClass.DatabaseHelper;
 import com.example.hoangdang.diemdanh.SupportClass.Network;
 import com.example.hoangdang.diemdanh.SupportClass.SecurePreferences;
+import com.example.hoangdang.diemdanh.SupportClass.Student;
 import com.kairos.Kairos;
 import com.kairos.KairosListener;
 
@@ -45,7 +46,10 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -77,7 +81,7 @@ public class MyFaceDetect extends AppCompatActivity {
 
     Bitmap image;
     public DatabaseHelper db;
-
+    ArrayList<Student> studentDBList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,7 +109,14 @@ public class MyFaceDetect extends AppCompatActivity {
         if (Network.isOnline(this) && !isOffline){
             setSocket();
         }
-        Log.wtf("Hiep2",db.getHiep("Tô Bạch Tùng Hiệp"));
+        Log.wtf("Hiep2",removeAccent("Tô Bạch Tùng Hiệp"));
+        studentDBList = db.getHiep();
+        for(int i=0;i<studentDBList.size();i++){
+            studentDBList.get(i).strName = removeAccent(studentDBList.get(i).strName);
+            Log.wtf("Hiep",studentDBList.get(i).strName + " " + studentDBList.get(i).iID );
+        }
+
+        // Hiep - 178
         verifylistener = new KairosListener() {
             @Override
             public void onSuccess(String s) {
@@ -254,20 +265,13 @@ public class MyFaceDetect extends AppCompatActivity {
     }
     private void Diemdanh(String name)
     {
-        int id;
-        if(name.equals("To Bach Tung Hiep"))
-            id = 171;
-        else if(name.equals("Bui Nhat Khoi"))
-            id = 172;
-        else if(name.equals("Le Van Tam"))
-            id = 173;
-        else if(name.equals("Dam Tuan Khoi"))
-            id = 174;
-        else if(name.equals("Can Cao Tri"))
-            id = 175;
-        else
-            return;
-        Log.d("Hiep","Name la " + name + "Id la " + id);
+        int id = 0;
+        for(int i=0;i<studentDBList.size();i++)
+        {
+            if(name.equals(studentDBList.get(i).strName))
+                id = studentDBList.get(i).iID;
+        }
+        Log.wtf("Hiep","Name la " + name + "Id la " + id);
         int attendanceID = prefs.getInt(AppVariable.CURRENT_ATTENDANCE, 0);
         db.changeAttendanceStatus(id, attendanceID, AppVariable.ATTENDANCE_STATUS);
         if(Network.isOnline(MyFaceDetect.this) && !isOffline){
@@ -432,5 +436,12 @@ public class MyFaceDetect extends AppCompatActivity {
                 });
             }
         }.start();
+    }
+    public static String removeAccent(String s) {
+        s = s.replace("Đ","D");
+        s = s.replace("đ","d");
+        String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
+        Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+        return pattern.matcher(temp).replaceAll("");
     }
 }

@@ -10,7 +10,8 @@ public class Network {
      * List of API
      */
 
-    public static final String HOST = "http://172.20.10.2:3000/"; //Heroku
+    //public static final String HOST = "http://172.20.10.2:3000/"; //Heroku
+    public static final String HOST = "http://hcmus-attendance.herokuapp.com/"; //Heroku
     //public static final String HOST = "http://192.168.21.22:3000/"; //May minh tret
     //public static final String HOST = "http://192.168.1.105:3000/"; //Vannguyen
     //public static final String HOST = "http://172.16.4.218:3000/"; //May Nghia

@@ -24,5 +24,10 @@ public class Student {
         this.presentations = presentations;
     }
 
+    public Student(int iID, String strName) {
+        this.iID = iID;
+        this.strName = strName;
+    }
+
     public Student(){}
 }

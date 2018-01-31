@@ -229,8 +229,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public String getHiep(String name){
-        String result = "";
+    public ArrayList<Student> getHiep(){
+
+        ArrayList<Student> studentList = new ArrayList<>();
         String selectQuery = "SELECT "
                 + COLUMN_ATTENDANCE_STUDENT_ID + ", "
                 + COLUMN_ATTENDANCE_STUDENT_NAME + ", "
@@ -240,15 +241,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_ATTENDANCE_D + ", "
                 + COLUMN_ATTENDANCE_P + ", "
                 + COLUMN_ATTENDANCE_STATUS + " "
-                + "FROM " + TABLE_ATTENDANCE_DETAIL + " "
-                + "WHERE " + COLUMN_ATTENDANCE_STUDENT_NAME + " = " + "\"Tô Bạch Tùng Hiệp\""  ;
+                + "FROM " + TABLE_ATTENDANCE_DETAIL + " ";
+               // + "WHERE " + COLUMN_ATTENDANCE_STUDENT_NAME + " collate FULL_DECOMPOSITION" + " = " + "\"To Bach Tung Hiep\""  ;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
             do {
-                result += cursor.getString(cursor.getColumnIndex("student_id")) + " ";
+                Student mystudent = new Student();
+                mystudent.iID = cursor.getInt(cursor.getColumnIndex("student_id"));
+                mystudent.strName = cursor.getString(cursor.getColumnIndex("student_name"));
+                studentList.add(mystudent);
             } while (cursor.moveToNext());
 
             cursor.close();
@@ -256,7 +260,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
         db.close();
-        return result;
+        return studentList;
     }
 
 
