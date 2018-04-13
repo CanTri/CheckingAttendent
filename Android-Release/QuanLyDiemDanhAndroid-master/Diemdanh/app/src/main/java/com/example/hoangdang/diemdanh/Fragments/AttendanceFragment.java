@@ -911,7 +911,7 @@ public class AttendanceFragment extends Fragment {
                         String log = "Toa do: (" + mylat + "," + mylong +") " + " - Method: QRCode" + " - Time: " + currentTime +"$";
                         Log.wtf("HiepQR",log );
                         //Update Log
-                        final ApiAdapter apiAdapter = new ApiAdapter();
+                        final ApiAdapter apiAdapter = new ApiAdapter(getContext());
                         apiAdapter.UpdateLog(getContext(),log, removeAccent( pref.getString(AppVariable.USER_NAME, "EMPTY")), new VolleyCallBack() {
                             @Override
                             public void onSuccess(String result) {

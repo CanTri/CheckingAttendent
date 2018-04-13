@@ -120,7 +120,7 @@ public class ResultActivity extends AppCompatActivity {
                 String log = "Toa do: (" + mylat + "," + mylong +") " + " - Method: Quiz" + " - Time: " + currentTime +"$";
                 Log.wtf("HiepQuiz",log );
                 //Update Log
-                final ApiAdapter apiAdapter = new ApiAdapter();
+                final ApiAdapter apiAdapter = new ApiAdapter(ResultActivity.this);
                 apiAdapter.UpdateLog(this,log, removeAccent( pref.getString(AppVariable.USER_NAME, "EMPTY")), new VolleyCallBack() {
                     @Override
                     public void onSuccess(String result) {

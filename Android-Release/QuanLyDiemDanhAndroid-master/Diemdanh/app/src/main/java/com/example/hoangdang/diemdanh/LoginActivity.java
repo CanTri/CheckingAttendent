@@ -5,9 +5,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +24,9 @@ import com.example.hoangdang.diemdanh.SupportClass.DatabaseHelper;
 import com.example.hoangdang.diemdanh.SupportClass.Network;
 import com.example.hoangdang.diemdanh.SupportClass.User;
 import com.example.hoangdang.diemdanh.SupportClass.SecurePreferences;
+import com.example.hoangdang.diemdanh.currentSessionImage.ApiAdapter;
+import com.example.hoangdang.diemdanh.currentSessionImage.VolleyCallBack;
+import com.example.hoangdang.diemdanh.studentQuiz.DetailActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -37,12 +42,15 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.hoangdang.diemdanh.currentSessionImage.MyFaceDetect.removeAccent;
+
 public class LoginActivity extends AppCompatActivity {
 
     @BindView(R.id.email_editText) EditText _email_editText;
     @BindView(R.id.password_editText) EditText _password_editText;
     @BindView(R.id.login_button) Button _login_button;
     @BindView(R.id.forgot_pw_textView) TextView _forgot_pw_textView;
+    @BindView(R.id.setting_host) TextView sethost_textView;
 
     protected ProgressDialog progressDialog;
 
@@ -66,6 +74,30 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Authenticating...");
         progressDialog.setCanceledOnTouchOutside(false);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+        String host = sharedPref.getString("baselink","Error");
+
+        if(host.equals("Error")) {
+            final ApiAdapter apiAdapter = new ApiAdapter(this);
+            apiAdapter.GetBaseURL(this, new VolleyCallBack() {
+                @Override
+                public void onSuccess(String result) throws JSONException {
+                    Log.wtf("HiepTestURL", result);
+                    JSONObject response = new JSONObject(result);
+                    String link = response.getString("baselink");
+                    Log.wtf("HiepBaseLink", link);
+                    SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(LoginActivity.this);
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putString("baselink", link);
+                    editor.commit();
+                }
+            });
+        }
+        else
+        {
+            Toast.makeText(LoginActivity.this,"Host setted ! " + host,Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -120,6 +152,13 @@ public class LoginActivity extends AppCompatActivity {
                 AlertDialog alertDialog = alertDialogBuilder.create();
 
                 alertDialog.show();
+            }
+        });
+        sethost_textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, SetHostActivity.class);
+                startActivity(intent);
             }
         });
     }

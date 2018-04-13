@@ -1,7 +1,9 @@
 package com.example.hoangdang.diemdanh.currentSessionImage;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -26,8 +28,14 @@ import java.util.Map;
 public class ApiAdapter {
     public String jsonResult;
     private String key = "tunghiep";
-    public String BaseUrl = "https://checkingattendance.000webhostapp.com/";
-    public void UpdateLog(Context context, final String log,final String name,final VolleyCallBack callBack)
+    //public String BaseUrl = "https://checkingattendance.000webhostapp.com/";
+    public String BaseUrl ;
+    public ApiAdapter(Context context) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        BaseUrl = sharedPref.getString("baselink","Error");
+    }
+
+    public void UpdateLog(Context context, final String log, final String name, final VolleyCallBack callBack)
     {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String url = BaseUrl + "LogAPI/updateLog.php";
@@ -180,7 +188,35 @@ public class ApiAdapter {
         };
         requestQueue.add(stringRequest);
     }
+    public void GetBaseURL(Context context, final VolleyCallBack callBack)
+    {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String url = "https://checkingattendance.000webhostapp.com/config.php";
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.wtf("HiepGetBaseURL",response);
+                try {
+                    callBack.onSuccess(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params = new HashMap<>();
+                return params;
+            }
+        };;
+        requestQueue.add(stringRequest);
+    }
     protected String base64FromBitmap(Bitmap image) {
         //Log.wtf("HiepCompress","Vo day");
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

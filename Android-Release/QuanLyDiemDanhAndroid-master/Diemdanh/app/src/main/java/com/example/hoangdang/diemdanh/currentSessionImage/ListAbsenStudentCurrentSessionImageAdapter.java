@@ -176,7 +176,7 @@ public class ListAbsenStudentCurrentSessionImageAdapter extends BaseAdapter impl
                 Log.wtf("HiepCheckList",log);
 
                 //Update Log
-                final ApiAdapter apiAdapter = new ApiAdapter();
+                final ApiAdapter apiAdapter = new ApiAdapter(context);
                 apiAdapter.UpdateLog(context,log,username , new VolleyCallBack() {
                     @Override
                     public void onSuccess(String result) {

@@ -87,7 +87,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
         dialog.setMessage("Loading pictures");
         dialog.show();
 
-        ApiAdapter apiAdapter = new ApiAdapter();
+        ApiAdapter apiAdapter = new ApiAdapter(UploadPhotoActivity.this);
         apiAdapter.GetLink(myname, this, new VolleyCallBack() {
             @Override
             public void onSuccess(String result) throws JSONException {
@@ -193,7 +193,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
             temp += test.get(i) + "$";
         Log.wtf("HiepRemove",temp);
         original_links = temp;
-        final ApiAdapter apiAdapter = new ApiAdapter();
+        final ApiAdapter apiAdapter = new ApiAdapter(UploadPhotoActivity.this);
         apiAdapter.UpdateApi(this, original_links, myname, new VolleyCallBack() {
             @Override
             public void onSuccess(String result) throws JSONException {
@@ -211,7 +211,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
     }
     public void UpdatedListView()
     {
-        ApiAdapter apiAdapter = new ApiAdapter();
+        ApiAdapter apiAdapter = new ApiAdapter(UploadPhotoActivity.this);
         Log.wtf("HiepTest","co vo day khong");
         apiAdapter.GetLink(myname, this, new VolleyCallBack() {
             @Override
@@ -242,7 +242,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                     try {
                         dialog.setMessage("Uploading");
                         dialog.show();
-                        final ApiAdapter apiAdapter = new ApiAdapter();
+                        final ApiAdapter apiAdapter = new ApiAdapter(this);
                         apiAdapter.TestImg(image, this, new VolleyCallBack() {
                             @Override
                             public void onSuccess(String result) {
@@ -305,7 +305,7 @@ public class UploadPhotoActivity extends AppCompatActivity {
                     try {
                         dialog.setMessage("Uploading");
                         dialog.show();
-                        final ApiAdapter apiAdapter = new ApiAdapter();
+                        final ApiAdapter apiAdapter = new ApiAdapter(this);
                         apiAdapter.TestImg(image, this, new VolleyCallBack() {
                             @Override
                             public void onSuccess(String result) {

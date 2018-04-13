@@ -270,7 +270,7 @@ public class MyFaceDetect extends AppCompatActivity {
                 dialog = new ProgressDialog(MyFaceDetect.this);
                 dialog.setMessage("Verifying");
                 dialog.show();
-                final ApiAdapter apiAdapter = new ApiAdapter();
+                final ApiAdapter apiAdapter = new ApiAdapter(MyFaceDetect.this);
                 apiAdapter.CheckMyApi(image,galleryID, MyFaceDetect.this, new VolleyCallBack() {
                     @Override
                     public void onSuccess(String result) {
@@ -315,7 +315,7 @@ public class MyFaceDetect extends AppCompatActivity {
                     dialog.show();
                     image = (Bitmap) data.getExtras().get("data");
                     try {
-                        final ApiAdapter apiAdapter = new ApiAdapter();
+                        final ApiAdapter apiAdapter = new ApiAdapter(MyFaceDetect.this);
                         apiAdapter.CheckMyApi(image,galleryID, this, new VolleyCallBack() {
                             @Override
                             public void onSuccess(String result) {
@@ -596,7 +596,7 @@ public class MyFaceDetect extends AppCompatActivity {
 
 
         //Update Log
-        final ApiAdapter apiAdapter = new ApiAdapter();
+        final ApiAdapter apiAdapter = new ApiAdapter(MyFaceDetect.this);
         apiAdapter.UpdateLog(this,log, removeAccent(username), new VolleyCallBack() {
             @Override
             public void onSuccess(String result) {

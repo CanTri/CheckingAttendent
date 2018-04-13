@@ -80,7 +80,8 @@
         <activity
             android:name=".currentSessionImage.UploadPhotoActivity"
             android:configChanges="orientation|screenSize" />
-        <activity android:name=".currentSessionImage.GPSTracker"></activity>
+        <activity android:name=".currentSessionImage.GPSTracker" />
+        <activity android:name=".SetHostActivity"></activity>
     </application>
 
 </manifest>

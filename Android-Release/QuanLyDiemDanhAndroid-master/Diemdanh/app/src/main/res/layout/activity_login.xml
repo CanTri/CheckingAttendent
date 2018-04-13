@@ -76,6 +76,15 @@
             android:gravity="center"
             android:textColor="@color/primary_darker"
             android:textSize="16sp"/>
+        <TextView
+            android:id="@+id/setting_host"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Set Host"
+            android:gravity="center"
+            android:textColor="@color/primary_darker"
+            android:textSize="16sp"/>
 
     </LinearLayout>
 
