@@ -227,18 +227,12 @@ var insert_users = [
     ['Đào Khước Anh', 'Nguyên', '1551012@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //85
     ['Nguyễn Phúc', 'Nguyên', '1551013@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //86
     //14APCS
-    ['Hồ Hữu', 'Phát', '1451001@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //87
-    ['Huỳnh Trần Anh', 'Phương', '1451002@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //88
-    ['Nguyễn Ngọc', 'Thanh', '1451003@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //89
-    ['Kim Nhật', 'Thành', '1451004@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //90
-    ['Thái', 'Thiện', '1451005@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //91
-    ['Nguyễn Bảo', 'Toàn', '1451006@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //92
-    ['Trịnh Hoàng', 'Triều', '1451007@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //93
-    ['Lê Minh', 'Trí', '1451008@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //94
-    ['Nguyễn Quang Minh', 'Trí', '1451009@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //95
-    ['Quách Minh', 'Trí', '1451010@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //96
-    ['Lê Quốc', 'Trung', '1451011@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //97
-    ['Huỳnh Minh', 'Tú', '1451012@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //98
+    ['Tô Bạch Tùng', 'Hiệp', '1451018@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //87
+    ['Lê Văn', 'Tâm', '1451050@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //88
+    ['Cấn Cao', 'Trí', '1451062@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //89
+    ['Bùi Nhật', 'Khôi', '1451034@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //90
+    ['Đàm Tuấn', 'Khôi', '1451033@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //91
+
     //13APCS
     ['Cao Thanh', 'Tùng', '1351001@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //99
     ['Huỳnh Thanh Quang', 'Tùng', '1351002@student.hcmus.edu.vn', '01228718705', bcrypt.hashSync('1353019', 10), 1], //100
