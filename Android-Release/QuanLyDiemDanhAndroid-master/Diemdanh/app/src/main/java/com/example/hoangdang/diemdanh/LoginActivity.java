@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         else
         {
-            Toast.makeText(LoginActivity.this,"Host setted ! " + host,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(LoginActivity.this,"Host setted ! " + host,Toast.LENGTH_SHORT).show();
         }
     }
 
