@@ -1,0 +1,29 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'QLDD' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for QLDD
+
+  pod 'SpreadsheetView'
+  pod 'MTBBarcodeScanner'
+  pod 'Socket.IO-Client-Swift', '~> 13.1.0'
+  pod "KRActivityIndicatorView"
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
+  pod 'AlamofireImage'
+  pod 'BSImagePicker'  
+
+  target 'QLDDTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'QLDDUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

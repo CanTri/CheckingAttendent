@@ -1,0 +1,6 @@
+framework module Pods_QLDDUITests {
+  umbrella header "Pods-QLDDUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
