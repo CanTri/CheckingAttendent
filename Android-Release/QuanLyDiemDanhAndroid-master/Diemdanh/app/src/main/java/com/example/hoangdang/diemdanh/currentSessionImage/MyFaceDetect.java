@@ -3,7 +3,6 @@ package com.example.hoangdang.diemdanh.currentSessionImage;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,16 +32,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.hoangdang.diemdanh.R;
 import com.example.hoangdang.diemdanh.SupportClass.AppVariable;
 import com.example.hoangdang.diemdanh.SupportClass.DatabaseHelper;
@@ -52,32 +43,23 @@ import com.example.hoangdang.diemdanh.SupportClass.Student;
 import com.example.hoangdang.diemdanh.SupportClass.User;
 import com.kairos.Kairos;
 import com.kairos.KairosListener;
-import com.loopj.android.http.Base64;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Pattern;
 
 import butterknife.BindView;
@@ -155,8 +137,7 @@ public class MyFaceDetect extends AppCompatActivity {
         if (Network.isOnline(this) && !isOffline){
             setSocket();
         }
-        Log.wtf("Hiep2",removeAccent("Tô Bạch Tùng Hiệp"));
-        studentDBList = db.getHiep();
+        studentDBList = db.getStudenListinClass();
         for(int i=0;i<studentDBList.size();i++){
             studentDBList.get(i).strName = removeAccent(studentDBList.get(i).strName);
             Log.wtf("Hiep",studentDBList.get(i).strName + " " + studentDBList.get(i).iID );

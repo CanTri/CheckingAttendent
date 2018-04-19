@@ -229,7 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return user;
     }
 
-    public ArrayList<Student> getHiep(){
+    public ArrayList<Student> getStudenListinClass(){
 
         ArrayList<Student> studentList = new ArrayList<>();
         String selectQuery = "SELECT "
